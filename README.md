@@ -1,6 +1,8 @@
 # The World in One Day — Monday 23 November 2026
 
 [![news-image-20261123](https://make.fun/badge/news-image-20261123.svg)](https://make.fun/bounty/news-image-20261123)
+[![rank](https://make.fun/badge/news-image-20261123/Sepsdeod/news-image-20261123/rank.svg)](https://make.fun/bounty/news-image-20261123/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=news-image-20261123)
+[![reward](https://make.fun/badge/news-image-20261123/Sepsdeod/news-image-20261123/reward.svg)](https://make.fun/bounty/news-image-20261123?utm_source=github&utm_medium=readme&utm_campaign=news-image-20261123)
 
 A single 1024x1024 poster that sums up Monday 23 November 2026 in five
 stories. It is laid out like a broadsheet front page: a masthead naming
