@@ -1,64 +1,63 @@
-# The World in One Image — Monday 23 November 2026
+# The World in One Day — Monday 23 November 2026
 
-[![make.fun · news-image-20261123](https://make.fun/badge/news-image-20261123.svg)](https://make.fun/bounty/news-image-20261123?utm_source=github&utm_medium=readme&utm_campaign=news-image-20261123)
-[![rank](https://make.fun/badge/news-image-20261123/Sepsdeod/news-image-20261123/rank.svg)](https://make.fun/bounty/news-image-20261123/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=news-image-20261123)
-[![reward](https://make.fun/badge/news-image-20261123/Sepsdeod/news-image-20261123/reward.svg)](https://make.fun/bounty/news-image-20261123?utm_source=github&utm_medium=readme&utm_campaign=news-image-20261123)
+[![news-image-20261123](https://make.fun/badge/news-image-20261123.svg)](https://make.fun/bounty/news-image-20261123)
 
-A one-image summary of the world's news of **Monday 23 November 2026**,
-drawn as a newspaper front page: one lead story and four more, each with
-a pictogram, a headline and a short deck.
-
-![The World in One Image — Monday 23 November 2026](entry.png)
+A single 1024x1024 poster that sums up Monday 23 November 2026 in five
+stories. It is laid out like a broadsheet front page: a masthead naming
+the day, then five stacked bands, one per story, each with a coloured
+spine, a kicker, a headline, a short factual body, and a small pictogram.
 
 ## The five stories
 
-1. **Labour · Germany** — IG Metall calls a 24-hour strike for Monday:
-   about 23,000 workers at 19 firms in northern Germany — Mercedes-Benz,
-   Meyer Werft, Siemens Gamesa — walk out in a pay dispute; the union
-   wants a 5% rise.
-2. **Diplomacy · New Delhi** — Nepal's prime minister Balendra Shah holds
-   delegation-level talks with Narendra Modi on Monday, his first state
-   visit as PM: MoUs and a joint vision for trade, energy and connectivity.
-3. **Disaster · Java** — The search resumes on Monday morning for dozens
-   still missing after the candy-factory fire in Cikande: 24 body bags
-   recovered, at least three confirmed dead, about 37 unaccounted for.
-4. **Sport · Wellington** — Final day of the first Test: New Zealand 157
-   for 4 at lunch, six wickets left, battling to save the match after
-   India's record 720 for 9 declared (Rahul 136, Pant 128).
-5. **Diplomacy · Singapore** — China's vice-premier Ding Xuexiang spends
-   the second day of his two-day visit in talks with Singapore's leaders.
+1. **Labour, Germany** — IG Metall calls a 24-hour strike for Monday:
+   about 23,000 workers at 19 firms in northern Germany walk out in a
+   pay dispute.
+2. **Diplomacy, New Delhi** — Nepal's prime minister Balendra Shah holds
+   delegation-level talks with Narendra Modi on his first bilateral trip
+   abroad as PM.
+3. **Disaster, Java, Indonesia** — The search resumes at 07:00 Monday at
+   the PT Fonusa Agung Mulia candy factory in Cikande, Serang, after
+   Saturday's fire left about 37 workers unaccounted for.
+4. **Sport, Wellington** — Day five of the first Test at the Basin
+   Reserve: New Zealand 157 for 4 at lunch, battling to save the match
+   after India declared on a record 720 for 9.
+5. **Diplomacy, Singapore** — China's vice-premier Ding Xuexiang is on
+   the second day of his two-day visit for talks with Singapore's
+   leaders.
 
-Every story happened or was first reported on Monday 23 November 2026.
-Facts verified against reporting by Reuters, India's Ministry of External
-Affairs and ESPNcricinfo on 23 November 2026. Stories from 21–22 November
-(the COP31 collapse, the US House result, the "El Chapo Isidro" capture,
-the Sparta II fire, the Dymer strike) were checked and left out: they are
-not this day's news.
+Every story happened, or was first reported, on 23 November 2026.
 
-## How to run it
+## How it is made
 
-`draw.py` renders the poster (Python 3 with Pillow and the system DejaVu
-fonts, deterministic — no timestamps, no randomness, no network):
+`draw.py` renders the poster from scratch with the Python standard
+library only: a small 5x7 bitmap font, a pixel buffer, and a hand-written
+PNG encoder. Nothing is downloaded and nothing is read from disk at
+draw time. Each story band carries a small flat pictogram on its right
+edge — a placard, two flags, a flame, a cricket bat and ball, and a
+columned building — drawn from rectangles, triangles and discs.
+`main.py` first checks that `entry.png` is a real PNG under the 1 MiB
+limit, then copies it into the output directory the grader provides.
 
-```sh
-python3 draw.py   # writes entry.png, 1024x1024
-```
-
-`main.py` (Python 3.13, standard library only) copies the shipped
-`entry.png` to the output directory:
+## How to run
 
 ```sh
 mkdir -p out && MAKEFUN_OUTPUT_DIR=out python3 main.py
 ```
 
-Running it twice produces byte-identical output.
+To re-render the poster from the drawing code first:
 
-## License
+```sh
+python3 draw.py && mkdir -p out && MAKEFUN_OUTPUT_DIR=out python3 main.py
+```
 
-MIT — see [LICENSE](LICENSE).
+The output is deterministic: running it twice produces byte-identical
+`entry.png` files. You can check that yourself:
 
----
+```sh
+mkdir -p /tmp/a /tmp/b
+MAKEFUN_OUTPUT_DIR=/tmp/a python3 main.py
+MAKEFUN_OUTPUT_DIR=/tmp/b python3 main.py
+cmp /tmp/a/entry.png /tmp/b/entry.png && echo identical
+```
 
-Built for the [make.fun](https://make.fun/r/7nvvsk82) bounty
-`news-image-20261123`. Try make.fun yourself:
-https://make.fun/r/7nvvsk82
+The finished poster is 1024x1024 pixels and well under the 1 MiB cap.
